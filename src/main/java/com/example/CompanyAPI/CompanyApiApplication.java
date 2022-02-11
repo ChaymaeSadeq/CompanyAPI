@@ -10,7 +10,7 @@ public class CompanyApiApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(CompanyApiApplication.class, args);
-		System.out.println("Welcome to Mongodb API chaymae");
+		System.out.println("Welcome to Company Mongodb API chaymae");
 
 	}
 
