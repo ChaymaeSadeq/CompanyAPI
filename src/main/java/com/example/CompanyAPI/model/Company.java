@@ -1,28 +1,36 @@
 package com.example.CompanyAPI.model;
 
-
-import java.math.BigInteger;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+import com.example.CompanyAPI.dto.CompanyDTO;
 
 @Document(collection="companies")
 public class Company {
 
 	@Id
 	private String id;
+	
 	private String NameComp;
+
 	private String EmailComp;
+	
 	private long PhoneNumber;
+	
 	private long NumberOfEmployees;
 	
 	
-	public Company( String nameComp, String emailComp, long phoneNumber, long numberOfEmployees) {
+	public Company() {
 		super();
-		NameComp = nameComp;
-		EmailComp = emailComp;
-		PhoneNumber = phoneNumber;
-		NumberOfEmployees = numberOfEmployees;
+	}
+
+	public Company(String id, String NameComp, String EmailComp, long PhoneNumber, long NumberOfEmployees) {
+		super();
+		this.id = id;
+		this.NameComp = NameComp;
+		this.EmailComp = EmailComp;
+		this.PhoneNumber = PhoneNumber;
+		this.NumberOfEmployees = NumberOfEmployees;
 	}
 
 	public String getId() {
@@ -39,19 +47,17 @@ public class Company {
 	}
 
 	public void setNameComp(String nameComp) {
-		NameComp = nameComp;
+		this.NameComp = nameComp;
 	}
 
-	public Company() {
-		super();
-	}
+	
 
 	public String getEmailComp() {
 		return EmailComp;
 	}
 
 	public void setEmailComp(String emailComp) {
-		EmailComp = emailComp;
+		this.EmailComp = emailComp;
 	}
 
 	public long getPhoneNumber() {
@@ -59,7 +65,7 @@ public class Company {
 	}
 
 	public void setPhoneNumber(long phoneNumber) {
-		PhoneNumber = phoneNumber;
+		this.PhoneNumber = phoneNumber;
 	}
 
 	public long getNumberOfEmployees() {
@@ -67,9 +73,22 @@ public class Company {
 	}
 
 	public void setNumberOfEmployees(long numberOfEmployees) {
-		NumberOfEmployees = numberOfEmployees;
+		this.NumberOfEmployees = numberOfEmployees;
 	}
 
+	public CompanyDTO convertToDto() {
+		return new CompanyDTO(id,NameComp, EmailComp, PhoneNumber,NumberOfEmployees);
+	}
+	
+	public Company updateFromDto(CompanyDTO companyDto) {
+		this.setId(companyDto.getId());
+		this.setNameComp(companyDto.getNameComp());
+		this.setEmailComp(companyDto.getEmailComp());
+		this.setPhoneNumber(companyDto.getPhoneNumber());
+		this.setNumberOfEmployees(companyDto.getNumberOfEmployees());
+
+		return this;
+	}
 //	 @Override
 //	  public String toString() {
 //	    return String.format(
